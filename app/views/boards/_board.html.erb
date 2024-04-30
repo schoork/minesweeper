@@ -6,6 +6,6 @@
   <td class="py-4 pl-4 pr-3 text-center text-sm font-medium text-gray-900 sm:pl-0"><%= board.difficulty %></td>
 
   <td class="py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-0">
-    <%= link_to "Play", board, class: "rounded-lg py-3 px-5 bg-blue-600 text-white font-medium" %>
+    <%= link_to "Play", board_path(board), class: "rounded-lg py-3 px-5 bg-blue-600 text-white font-medium", data: { turbo: false } %>
   </td>
 </tr>

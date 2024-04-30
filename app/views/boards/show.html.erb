@@ -1,6 +1,22 @@
-<div class="mx-auto md:w-2/3 w-full flex">
-  <div class="mx-auto">
+<div>
+  <h1 class="text-base font-semibold leading-6 text-gray-900"><%= @board.name %></h1>
 
-    <%= link_to "Back to boards", boards_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  </div>
+
+  <% @board.height.times do |y| %>
+    <div class="flex items-center justify-center">
+      <% @board.width.times do |x| %>
+        <% if @board.bombs.include?([x, y]) %>
+          <div class="w-6 h-6">
+            <%= image_tag "bomb.png" %>
+          </div>
+        <% else %>
+          <div class="bg-gray-100 shadow-inner text-center w-6 h-6">
+            <%= bombs_near(@board.bombs, x, y) %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= link_to "Back to boards", boards_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 </div>
