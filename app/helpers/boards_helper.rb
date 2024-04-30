@@ -35,4 +35,12 @@ module BoardsHelper
   def click_path(board, x, y)
     "#{board_click_path(board, x: x, y: y)}"
   end
+
+  def nicely_formatted_datetime(datetime)
+    datetime.strftime("%-m/%-d/%y at %H:%M%P %Z")
+  end
+
+  def game_status_color(board)
+    board.game_over? ? "text-red-500" : "text-blue-500"
+  end
 end

@@ -3,7 +3,13 @@ class BoardsController < ApplicationController
 
   # GET /boards or /boards.json
   def index
-    @boards = Board.all
+    if params[:all] == "true"
+      @boards = Board.ordered
+      @all = true
+    else
+      @boards = Board.limit_ordered
+      @all = false
+    end
   end
 
   # GET /boards/1 or /boards/1.json
@@ -22,7 +28,6 @@ class BoardsController < ApplicationController
   # POST /boards or /boards.json
   def create
     @board = Board.new(board_params)
-    @board.user = current_user
 
     respond_to do |format|
       if @board.save
@@ -79,6 +84,6 @@ class BoardsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def board_params
-      params.require(:board).permit(:user_id, :width, :height, :mine_number, :name)
+      params.require(:board).permit(:email, :width, :height, :mine_number, :name)
     end
 end

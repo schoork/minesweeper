@@ -1,11 +1,13 @@
 class Board < ApplicationRecord
-  belongs_to :user
-  has_many :board_rows
-
-  validates :height, :width, :mine_number, :name, presence: true
+  validates :email, :name, presence: true
+  validates :email, email: true, unless: -> { email.blank? }
+  validates :width, :height, :mine_number, numericality: { only_integer: true, greater_than: 0 }
   validate :is_playable?
 
   before_create :generate_bombs
+
+  scope :ordered, -> { order(created_at: :desc) }
+  scope :limit_ordered, -> { ordered.limit(10) }
 
   def difficulty
     return "Unknown" unless height && width && mine_number
@@ -43,8 +45,12 @@ class Board < ApplicationRecord
         self.flags << [x, y]
       end
     else
-      self.clicks << [x, y]
-      self.flags.delete([x, y])
+      if self.bombs.include?([x, y])
+        self.game_over = true
+      else
+        self.clicks << [x, y]
+        self.flags.delete([x, y])
+      end
     end
   end
 

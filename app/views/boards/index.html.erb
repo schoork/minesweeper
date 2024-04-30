@@ -3,7 +3,7 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <div class="flex justify-between items-center">
+  <div class="flex justify-between items-center mb-5">
     <h1 class="font-bold text-4xl">Boards</h1>
     <%= link_to "New board", new_board_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
@@ -16,6 +16,7 @@
           <tr>
             <th scope="col" class="py-3 pl-4 pr-3 text-center text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-0">Name</th>
             <th scope="col" class="py-3 pl-4 pr-3 text-center text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-0">User</th>
+            <th scope="col" class="py-3 pl-4 pr-3 text-center text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-0">Created at</th>
             <th scope="col" class="py-3 pl-4 pr-3 text-center text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-0">Dimensions</th>
             <th scope="col" class="py-3 pl-4 pr-3 text-center text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-0">Number of Mines</th>
             <th scope="col" class="py-3 pl-4 pr-3 text-center text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-0">Difficulty</th>
@@ -28,5 +29,13 @@
         </table>
       <% end %>
     </div>
+  </div>
+
+  <div class="my-5">
+    <% if @all %>
+      <%= link_to "View newest boards", boards_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <% else %>
+      <%= link_to "View all generated boards", boards_path(all: true), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <% end %>
   </div>
 </div>
