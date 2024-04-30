@@ -33,10 +33,6 @@ module BoardsHelper
     end
   end
 
-  def click_path(board, x, y)
-    board_click_path(board, x: x, y: y).to_s
-  end
-
   def nicely_formatted_datetime(datetime)
     datetime.strftime("%-m/%-d/%y at %H:%M%P %Z")
   end

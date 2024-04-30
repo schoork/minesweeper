@@ -12,8 +12,4 @@ export default class extends Controller {
         }
         Turbo.visit(url)
     }
-
-    flag() {
-        console.log("flag!")
-    }
 }
