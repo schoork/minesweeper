@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_action :set_board, only: %i[ show edit update destroy add_click ]
+  before_action :set_board, only: %i[show edit update destroy add_click]
 
   # GET /boards or /boards.json
   def index
@@ -58,7 +58,7 @@ class BoardsController < ApplicationController
     y = params[:y].to_i
     flag = params[:flag] == "true"
 
-    if (0...@board.width).include?(x) && (0...@board.height).include?(y)
+    if (0...@board.width).cover?(x) && (0...@board.height).cover?(y)
       @board.add_click(x, y, flag)
       @board.save
     end
@@ -77,13 +77,14 @@ class BoardsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_board
-      @board = Board.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def board_params
-      params.require(:board).permit(:email, :width, :height, :mine_number, :name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_board
+    @board = Board.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def board_params
+    params.require(:board).permit(:email, :width, :height, :mine_number, :name)
+  end
 end

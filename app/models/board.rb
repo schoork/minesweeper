@@ -1,7 +1,7 @@
 class Board < ApplicationRecord
   validates :email, :name, presence: true
   validates :email, email: true, unless: -> { email.blank? }
-  validates :width, :height, :mine_number, numericality: { only_integer: true, greater_than: 0 }
+  validates :width, :height, :mine_number, numericality: {only_integer: true, greater_than: 0}
   validate :is_playable?
 
   before_create :generate_bombs
@@ -40,17 +40,15 @@ class Board < ApplicationRecord
   def add_click(x, y, flag)
     if flag
       if flags.include?([x, y])
-        self.flags.delete([x, y])
+        flags.delete([x, y])
       else
-        self.flags << [x, y]
+        flags << [x, y]
       end
+    elsif bombs.include?([x, y])
+      self.game_over = true
     else
-      if self.bombs.include?([x, y])
-        self.game_over = true
-      else
-        self.clicks << [x, y]
-        self.flags.delete([x, y])
-      end
+      clicks << [x, y]
+      flags.delete([x, y])
     end
   end
 

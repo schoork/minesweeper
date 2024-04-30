@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def tailwind_classes_for(flash_type)
     {
       success: "bg-yellow-400 border-l-4 border-yellow-500 text-black",
