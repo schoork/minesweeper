@@ -6,18 +6,20 @@
     <div class="flex items-center justify-center">
       <% @board.width.times do |x| %>
         <% if @board.clicks.include?([x, y]) %>
-          <div class="bg-gray-100 shadow-inner text-center w-6 h-6">
+          <div class="bg-gray-50 border border-gray-300 shadow-inner text-center w-6 h-6">
             <% if @board.bombs.include?([x, y]) %>
               <%= image_tag "bomb.png" %>
             <% else %>
-              <%= bombs_near(@board.bombs, x, y) %>
+              <span class="<%= bombs_near_color(@board.bombs, x, y) %>"><%= bombs_near(@board.bombs, x, y) %></span>
             <% end %>
           </div>
         <% else %>
-          <div class="bg-gray-100 shadow-inner w-6 h-6" data-controller="cell" data-cell-url-value="<%= "#{add_click_board_path(@board, x: x, y: y)}" %>" data-action="click->cell#click">
-            <% if @board.flags.include?([x, y]) %>
-              <%= image_tag "flag.jpeg" %>
-            <% end %>
+          <div class="bg-gray-100 border border-gray-300 grid place-items-center w-6 h-6" data-controller="cell" data-cell-url-value="<%= "#{add_click_board_path(@board, x: x, y: y)}" %>" data-action="click->cell#click">
+            <div class="bg-gray-200 shadow-2xl w-4 h-4">
+              <% if @board.flags.include?([x, y]) %>
+                <%= image_tag "flag.jpeg" %>
+              <% end %>
+            </div>
           </div>
         <% end %>
       <% end %>
