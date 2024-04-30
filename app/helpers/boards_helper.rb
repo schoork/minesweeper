@@ -6,7 +6,8 @@ module BoardsHelper
         near_array << [i, j]
       end
     end
-    set.intersection(near_array).count
+    count = set.intersection(near_array).count
+    count.positive? ? count : ""
   end
 
   def bombs_near_color(set, x, y)
@@ -28,7 +29,7 @@ module BoardsHelper
     when 8
       "text-gray-500"
     else
-      "text-lime-500"
+      ""
     end
   end
 
