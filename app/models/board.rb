@@ -52,6 +52,7 @@ class Board < ApplicationRecord
     end
   end
 
+  # algorithm for generating the board
   def generate_bombs
     temp_bombs = Set.new
 
