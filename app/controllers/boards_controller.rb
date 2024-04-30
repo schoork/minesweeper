@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_action :set_board, only: %i[ show edit update destroy ]
+  before_action :set_board, only: %i[ show edit update destroy add_click ]
 
   # GET /boards or /boards.json
   def index
@@ -46,6 +46,19 @@ class BoardsController < ApplicationController
         format.json { render json: @board.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def add_click
+    x = params[:x].to_i
+    y = params[:y].to_i
+    flag = params[:flag] == "true"
+
+    if (0...@board.width).include?(x) && (0...@board.height).include?(y)
+      @board.add_click(x, y, flag)
+      @board.save
+    end
+
+    redirect_to board_path
   end
 
   # DELETE /boards/1 or /boards/1.json

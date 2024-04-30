@@ -35,6 +35,19 @@ class Board < ApplicationRecord
     end
   end
 
+  def add_click(x, y, flag)
+    if flag
+      if flags.include?([x, y])
+        self.flags.delete([x, y])
+      else
+        self.flags << [x, y]
+      end
+    else
+      self.clicks << [x, y]
+      self.flags.delete([x, y])
+    end
+  end
+
   def generate_bombs
     temp_bombs = Set.new
 

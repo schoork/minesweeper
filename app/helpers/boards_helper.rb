@@ -8,4 +8,8 @@ module BoardsHelper
     end
     set.intersection(near_array).count
   end
+
+  def click_path(board, x, y)
+    "#{board_click_path(board, x: x, y: y)}"
+  end
 end
