@@ -23,6 +23,11 @@ Then you can deploy with Github via the console or this command:
 git push heroku main
 ```
 
+When done, delete the app:
+```
+heroku apps:destroy
+```
+
 ## Next Steps
 
 I'd love to have it do the display all neighbors with 0 close mines that the real Minesweeper does. I was playing 
